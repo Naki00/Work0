@@ -25,6 +25,9 @@ app.get('/welcome', (req, res) =>
   }),
 );
 
+app.get("/form.html",(req,res)=>{
+    res.sendFile(path.join(__dirname+'/public/form.html'));
+});
 app.post('/', function(req, res) {
    
    var result ={ student_id: req.body.student_id,
@@ -32,7 +35,6 @@ app.post('/', function(req, res) {
      lastname: req.body.lastname,
      gender: req.body.gender
    }
-
   res.json(result);
 
 });
@@ -49,9 +51,14 @@ app.get('/ok', (req, res) =>{
 app.get('/student/:student_id', function(req, res) {
     util.fakeStudentbyInfo(req.params.student_id, function (result) {
         res.json(result);
+        console.log(result);
     });
 });
 
+app.post("/",function (req,res) {
+  const sudent = req.query;
+  console.log("this is working");
+});
 
 var port = process.env.PORT || 3000;
 
